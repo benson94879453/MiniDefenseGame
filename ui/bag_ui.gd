@@ -76,9 +76,45 @@ func mouse_left_slot_button(slot_button) -> void:
 	elif not slot_button.is_empty() and not mouse_item:
 		take_item_from_slot(slot_button)
 		
-	# 【新增】情況 3：點擊有東西的格子 且 手上也有東西 -> 互相交換
+	# 情況 3：點擊有東西的格子 且 手上也有東西
 	elif not slot_button.is_empty() and mouse_item:
-		swap_item_with_slot(slot_button)
+		# 取得兩邊的資料
+		var slot_data: Slot = slot_button.contained_item_icon.slot_data
+		var hand_data: Slot = mouse_item.slot_data
+		
+		# 【判斷分支】：利用剛剛寫的 is_same_item 來決定要堆疊還是交換
+		if slot_data.is_same_item(hand_data):
+			stack_items(slot_button)  # 執行堆疊邏輯
+		else:
+			swap_item_with_slot(slot_button) # 執行原本的交換邏輯
+	
+# 【新增】處理堆疊的數學邏輯
+func stack_items(slot_button) -> void:
+	var slot_data: Slot = slot_button.contained_item_icon.slot_data
+	var hand_data: Slot = mouse_item.slot_data
+	var max_stack: int = slot_data.item.max_stack # 取得該道具的堆疊上限
+	
+	# 計算總數
+	var total_amount: int = slot_data.count + hand_data.count
+	
+	if total_amount <= max_stack:
+		# 情況 A：完美合併 (未超出上限)
+		# 1. 更新資料庫的格子數量
+		inventory_data.set_slot_count(slot_button.slot_index, total_amount)
+		
+		# 2. 銷毀手上的道具節點
+		mouse_item.queue_free()
+		mouse_item = null
+	else:
+		# 情況 B：溢出與殘留 (超出上限)
+		# 1. 格子被塞滿，資料庫數量設為 max_stack
+		inventory_data.set_slot_count(slot_button.slot_index, max_stack)
+		
+		# 2. 計算手上還剩多少，並更新手上的資料
+		hand_data.count = total_amount - max_stack
+		
+		# 3. 呼叫 UI 節點內建的方法，讓它重新顯示剩下的數字
+		mouse_item.slot_item_update()
 		
 func take_item_from_slot(slot_button) -> void:
 	mouse_item = slot_button.take_item() # UI 拿起
@@ -120,3 +156,78 @@ func swap_item_with_slot(slot_button) -> void:
 	# 5. 更新資料庫：利用你寫好的 insert_slot 將「原本手上的資料」直接覆蓋到該格中
 	# 由於這會觸發 inventory_update 訊號更新畫面，而此時 UI 已經換好了，因此不會有任何衝突！
 	inventory_data.insert_slot(slot_button.slot_index, original_mouse_data)
+
+# ==========================================
+# 右鍵系統邏輯 (Right-Click Logic)
+# ==========================================
+
+# 邏輯 1：平分拿起 (Split Pick-up)
+func split_half_from_slot(slot_button) -> void:
+	var slot_data: Slot = slot_button.contained_item_icon.slot_data
+	var total_count: int = slot_data.count
+	
+	# 數學計算：拿走一半 (進位)，留下一半
+	var hand_count: int = int((total_count + 1) / 2) 
+	var left_count: int = total_count - hand_count   
+	
+	# --- 表現層 (UI) 處理 ---
+	if left_count == 0:
+		# 如果原本只有 1 個，平分後格子會變空，這等同於「左鍵直接拿走」
+		take_item_from_slot(slot_button)
+		return
+		
+	# 如果格子還有剩，我們需要「憑空創造」一個新的圖示給滑鼠
+	mouse_item = item_icon_scene.instantiate()
+	
+	# 創造獨立的新資料 (避免與格子裡的資料記憶體位置重疊)
+	var new_hand_data = Slot.new()
+	new_hand_data.item = slot_data.item
+	new_hand_data.count = hand_count
+	mouse_item.slot_data = new_hand_data
+	
+	# 讓新圖示顯示在畫面上並跟隨滑鼠
+	add_child(mouse_item)
+	mouse_item.global_position = get_global_mouse_position()
+	mouse_item.slot_item_update()
+	
+	# --- 資料層 (Data) 處理 ---
+	# 呼叫剛寫好的後台方法，扣除被拿走的數量 (會自動發出 UI 更新訊號)
+	inventory_data.sub_slot_count(slot_button.slot_index, hand_count)
+
+
+# 邏輯 2：單個放下 (Single Drop)
+func drop_one_to_slot(slot_button) -> void:
+	var hand_data: Slot = mouse_item.slot_data
+	
+	# --- 表現層 (UI) 與 資料層 (Data) 處理 ---
+	if slot_button.is_empty():
+		# 情況 A：丟 1 個到「空格子」
+		# 1. 創造格子裡的新圖示與新資料
+		var new_icon = item_icon_scene.instantiate()
+		var new_slot_data = Slot.new()
+		new_slot_data.item = hand_data.item
+		new_slot_data.count = 1
+		new_icon.slot_data = new_slot_data
+		
+		# 2. 塞入 UI 節點
+		slot_button.insert(new_icon)
+		new_icon.slot_item_update()
+		
+		# 3. 寫入後台資料庫 (覆蓋該空格)
+		inventory_data.update_slot(slot_button.slot_index, new_slot_data)
+		
+	else:
+		# 情況 B：丟 1 個到「有相同道具的格子」
+		# 直接呼叫剛寫好的後台方法，讓該格數量 + 1 (會自動發出 UI 更新訊號)
+		inventory_data.add_slot_count(slot_button.slot_index, 1)
+
+	# --- 處理手上剩下的道具 ---
+	hand_data.count -= 1 # 手上扣 1 個
+	
+	if hand_data.count > 0:
+		# 手上還有剩，讓滑鼠上的圖示更新數字
+		mouse_item.slot_item_update()
+	else:
+		# 手上扣到沒了，銷毀滑鼠上的節點，回歸空手狀態
+		mouse_item.queue_free()
+		mouse_item = null
