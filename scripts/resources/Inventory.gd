@@ -1,20 +1,24 @@
 extends Resource
-
 class_name Inventory
 
 signal inventory_update
 
-# 這是一個陣列，裝著所有的 Slot 資料 (例如 36 個格子)
 @export var slots: Array[Slot]
 
 func remove_slot(slot: Slot):
 	var index = slots.find(slot)
-	
 	if index < 0: return
 	
-	# 【修復】：呼叫 Slot 內建的 clear() 方法，真正清空資料格
-	slots[index].clear()
+	# 【修復】：換上一個全新的空白格子，這樣原本拿在手上的資料才不會被清空
+	slots[index] = Slot.new()
 	inventory_update.emit()
+	
+func update_slot(index: int, new_slot_data: Slot) -> void:
+	if index >= 0 and index < slots.size():
+		# 將新道具的資料「拷貝」到這格裡面
+		slots[index].item = new_slot_data.item
+		slots[index].count = new_slot_data.count
+		inventory_update.emit()
 
 func insert_slot(slot_index: int, slot: Slot):
 	slots[slot_index] = slot

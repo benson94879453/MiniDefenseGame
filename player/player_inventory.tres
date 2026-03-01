@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Inventory" load_steps=44 format=3 uid="uid://c4gdxiql02646"]
 
-[ext_resource type="Script" uid="uid://d3tk4m2l5yq0h" path="res://scripts/resources/Inventory.gd" id="1_ja0dw"]
-[ext_resource type="Script" uid="uid://bmw10rt7c88hg" path="res://scripts/resources/Slot.gd" id="2_ep336"]
+[ext_resource type="Script" uid="uid://d3tk4m2l5yq0h" path="res://scripts/resources/Inventory.gd" id="1_5dyb5"]
+[ext_resource type="Script" uid="uid://bmw10rt7c88hg" path="res://scripts/resources/Slot.gd" id="2_s4ccx"]
 [ext_resource type="Resource" uid="uid://ds8s7kulpm1w" path="res://item/apple.tres" id="3_5dyb5"]
 [ext_resource type="Resource" uid="uid://b7g10ak8rp4sd" path="res://item/axe.tres" id="4_s4ccx"]
 [ext_resource type="Resource" uid="uid://doqig8xvspypg" path="res://item/banana.tres" id="5_vvr1h"]
@@ -9,160 +9,162 @@
 [ext_resource type="Resource" uid="uid://b3wiftb8swqan" path="res://item/wood.tres" id="7_towno"]
 
 [sub_resource type="Resource" id="Resource_ja0dw"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 item = ExtResource("3_5dyb5")
 count = 32
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_ep336"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 item = ExtResource("4_s4ccx")
 count = 1
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_q1hnr"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 item = ExtResource("5_vvr1h")
 count = 32
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_x05wf"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 item = ExtResource("6_60utp")
 count = 32
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_65hft"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 item = ExtResource("7_towno")
 count = 10
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_5dyb5"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_s4ccx"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_vvr1h"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
+item = ExtResource("3_5dyb5")
+count = 15
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_60utp"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_towno"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_ghfo5"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_la3qd"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_a631d"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_3ib8q"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_nots1"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_pxiqp"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_gv76d"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_1p5ry"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_vcef7"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_iqp4g"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_v726t"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_tbox6"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_8jsv1"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_05u2y"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_4kcnp"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_pk1ok"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_dbcn6"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_quovr"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_rh22j"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_veyhb"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_j0wdc"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_yeeuh"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_dg0l3"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_pthdk"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_invd2"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_8efrf"]
-script = ExtResource("2_ep336")
+script = ExtResource("2_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [resource]
-script = ExtResource("1_ja0dw")
-slots = Array[ExtResource("2_ep336")]([SubResource("Resource_ja0dw"), SubResource("Resource_ep336"), SubResource("Resource_q1hnr"), SubResource("Resource_x05wf"), SubResource("Resource_65hft"), SubResource("Resource_5dyb5"), SubResource("Resource_s4ccx"), SubResource("Resource_vvr1h"), SubResource("Resource_60utp"), SubResource("Resource_towno"), SubResource("Resource_ghfo5"), SubResource("Resource_la3qd"), SubResource("Resource_a631d"), SubResource("Resource_3ib8q"), SubResource("Resource_nots1"), SubResource("Resource_pxiqp"), SubResource("Resource_gv76d"), SubResource("Resource_1p5ry"), SubResource("Resource_vcef7"), SubResource("Resource_iqp4g"), SubResource("Resource_v726t"), SubResource("Resource_tbox6"), SubResource("Resource_8jsv1"), SubResource("Resource_05u2y"), SubResource("Resource_4kcnp"), SubResource("Resource_pk1ok"), SubResource("Resource_dbcn6"), SubResource("Resource_quovr"), SubResource("Resource_rh22j"), SubResource("Resource_veyhb"), SubResource("Resource_j0wdc"), SubResource("Resource_yeeuh"), SubResource("Resource_dg0l3"), SubResource("Resource_pthdk"), SubResource("Resource_invd2"), SubResource("Resource_8efrf")])
+script = ExtResource("1_5dyb5")
+slots = Array[ExtResource("2_s4ccx")]([SubResource("Resource_ja0dw"), SubResource("Resource_ep336"), SubResource("Resource_q1hnr"), SubResource("Resource_x05wf"), SubResource("Resource_65hft"), SubResource("Resource_5dyb5"), SubResource("Resource_s4ccx"), SubResource("Resource_vvr1h"), SubResource("Resource_60utp"), SubResource("Resource_towno"), SubResource("Resource_ghfo5"), SubResource("Resource_la3qd"), SubResource("Resource_a631d"), SubResource("Resource_3ib8q"), SubResource("Resource_nots1"), SubResource("Resource_pxiqp"), SubResource("Resource_gv76d"), SubResource("Resource_1p5ry"), SubResource("Resource_vcef7"), SubResource("Resource_iqp4g"), SubResource("Resource_v726t"), SubResource("Resource_tbox6"), SubResource("Resource_8jsv1"), SubResource("Resource_05u2y"), SubResource("Resource_4kcnp"), SubResource("Resource_pk1ok"), SubResource("Resource_dbcn6"), SubResource("Resource_quovr"), SubResource("Resource_rh22j"), SubResource("Resource_veyhb"), SubResource("Resource_j0wdc"), SubResource("Resource_yeeuh"), SubResource("Resource_dg0l3"), SubResource("Resource_pthdk"), SubResource("Resource_invd2"), SubResource("Resource_8efrf")])
 metadata/_custom_type_script = "uid://d3tk4m2l5yq0h"

@@ -1,19 +1,14 @@
 extends Control
 
-# --- 節點引用 (Node References) ---
 @onready var bag_slot_container: GridContainer = %BagSlotContainer
 @onready var hot_bar_container: HBoxContainer = %HotBarContainer
 
-# --- 資料與設定 (Data & Settings) ---
 @onready var all_ui_slots: Array = hot_bar_container.get_children() + bag_slot_container.get_children()
-
 var inventory_data: Inventory = preload("res://player/player_inventory.tres")
-
 @onready var item_icon_scene: PackedScene = preload("res://ui/slot_item.tscn")
 
 var mouse_item: SlotItem = null
 
-# --- 核心生命週期 (Lifecycle) ---
 func _ready() -> void:
 	connect_slot_signals()
 	close_bag()
@@ -26,11 +21,12 @@ func _process(_delta: float) -> void:
 	if mouse_item:
 		mouse_item.global_position = get_global_mouse_position()
 
-# --- 介面更新邏輯 (UI Logic) ---
 func connect_slot_signals() -> void:
 	for slot_button in all_ui_slots:
-		if not slot_button.mouse_button_left_press.is_connected(mouse_left_slot_button):
-			slot_button.mouse_button_left_press.connect(mouse_left_slot_button.bind(slot_button))
+		# 【修復小細節】：Godot 4 的 Callable 檢查必須包含 bind，否則每次都會以為沒綁定過
+		var callable = mouse_left_slot_button.bind(slot_button)
+		if not slot_button.mouse_button_left_press.is_connected(callable):
+			slot_button.mouse_button_left_press.connect(callable)
 
 func bag_update() -> void:
 	if inventory_data.slots.size() != all_ui_slots.size():
@@ -54,7 +50,6 @@ func bag_update() -> void:
 		item_icon.slot_data = current_slot_data
 		item_icon.slot_item_update()
 
-# --- 背包狀態管理 (State Management) ---
 func set_player_inventory(player_inventory: Inventory) -> void:
 	if inventory_data and inventory_data.inventory_update.is_connected(bag_update):
 		inventory_data.inventory_update.disconnect(bag_update)
@@ -62,37 +57,66 @@ func set_player_inventory(player_inventory: Inventory) -> void:
 	inventory_data = player_inventory
 	
 	if inventory_data:
-		# 【修復】：確保在呼叫 bag_update 嘗試插入 UI 前，所有格子都已獲得背包資料庫的參考
-		for slot_button in all_ui_slots:
-			slot_button.slot_inventory = inventory_data
-			
 		inventory_data.inventory_update.connect(bag_update)
 		bag_update()
 
 func open_bag(player_inventory: Inventory) -> void:
 	set_player_inventory(player_inventory)
-	# 【修復】：移除了原本多餘的信號斷開與重複的 for 迴圈
 	show()
 
 func close_bag() -> void:
 	hide()
 
-# --- 滑鼠互動邏輯 (Mouse Interaction) ---
 func mouse_left_slot_button(slot_button) -> void:
+	# 情況 1：點擊空格 且 手上有東西 -> 放下物品
 	if slot_button.is_empty() and mouse_item:
 		insert_item_in_slot(slot_button)
+		
+	# 情況 2：點擊有東西的格子 且 手上沒東西 -> 拿起物品
 	elif not slot_button.is_empty() and not mouse_item:
 		take_item_from_slot(slot_button)
 		
+	# 【新增】情況 3：點擊有東西的格子 且 手上也有東西 -> 互相交換
+	elif not slot_button.is_empty() and mouse_item:
+		swap_item_with_slot(slot_button)
+		
 func take_item_from_slot(slot_button) -> void:
-	mouse_item = slot_button.take_item()
+	mouse_item = slot_button.take_item() # UI 拿起
 	
 	if mouse_item:
 		add_child(mouse_item)
 		mouse_item.global_position = get_global_mouse_position()
+		
+		# 由總管負責通知資料庫移除這筆資料
+		inventory_data.remove_slot(mouse_item.slot_data)
 
-func insert_item_in_slot(slot_button):
+func insert_item_in_slot(slot_button) -> void:
 	var item = mouse_item
 	remove_child(mouse_item)
 	mouse_item = null
-	slot_button.insert(item)
+	
+	slot_button.insert(item) # UI 放下
+	
+	# 由總管負責通知資料庫寫入這筆資料
+	inventory_data.insert_slot(slot_button.slot_index, item.slot_data)
+
+# 【新增】：完美的交換道具邏輯
+func swap_item_with_slot(slot_button) -> void:
+	# 1. 暫存：記住原本在游標上的資料與圖示
+	var original_mouse_data: Slot = mouse_item.slot_data
+	
+	# 2. 拿出：把格子裡原本的道具拿出來當作暫存
+	var temp_item: SlotItem = slot_button.take_item() 
+	
+	# 3. 放入：把手上的道具從根節點移除，並塞進格子裡
+	remove_child(mouse_item)
+	slot_button.insert(mouse_item) 
+	
+	# 4. 接手：讓原本格子裡的道具，變成你手上拿著的東西
+	mouse_item = temp_item 
+	add_child(mouse_item)
+	mouse_item.global_position = get_global_mouse_position() # 瞬間校正位置防閃爍
+	
+	# 5. 更新資料庫：利用你寫好的 insert_slot 將「原本手上的資料」直接覆蓋到該格中
+	# 由於這會觸發 inventory_update 訊號更新畫面，而此時 UI 已經換好了，因此不會有任何衝突！
+	inventory_data.insert_slot(slot_button.slot_index, original_mouse_data)
