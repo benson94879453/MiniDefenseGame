@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccpf3umbtattp"]
+
+[ext_resource type="PackedScene" uid="uid://c03p1vd8fpc6e" path="res://player/player.tscn" id="1_tcf2h"]
+[ext_resource type="PackedScene" uid="uid://bhpcd0e51nb63" path="res://ui/bag_ui.tscn" id="2_4717r"]
+
+[node name="world" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_tcf2h")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="bag_ui" parent="CanvasLayer" instance=ExtResource("2_4717r")]

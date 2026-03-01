@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://doqig8xvspypg"]
+
+[ext_resource type="Script" uid="uid://cqppj6okxn01l" path="res://GDScript/ItemData.gd" id="1_52mhi"]
+[ext_resource type="Texture2D" uid="uid://byxsiphyabecb" path="res://assets/banana.png" id="2_npie8"]
+
+[resource]
+script = ExtResource("1_52mhi")
+id = 2
+name = "香蕉"
+texture = ExtResource("2_npie8")
+metadata/_custom_type_script = "uid://cqppj6okxn01l"

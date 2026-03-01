@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b3wiftb8swqan"]
+
+[ext_resource type="Script" uid="uid://cqppj6okxn01l" path="res://GDScript/ItemData.gd" id="1_ldq3k"]
+[ext_resource type="Texture2D" uid="uid://wc5g37qtlds5" path="res://assets/wood.png" id="2_3a3gp"]
+
+[resource]
+script = ExtResource("1_ldq3k")
+id = 4
+name = "原木"
+texture = ExtResource("2_3a3gp")
+max_stack = 16
+metadata/_custom_type_script = "uid://cqppj6okxn01l"

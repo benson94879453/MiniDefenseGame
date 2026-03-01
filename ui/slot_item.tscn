@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://chioy3n6ookj6"]
+
+[ext_resource type="Script" uid="uid://bf1ycjng2sk4m" path="res://ui/slot_item.gd" id="1_fuwyw"]
+[ext_resource type="Texture2D" uid="uid://dddmr5yi13p45" path="res://assets/apple.png" id="1_l0725"]
+
+[node name="slot_item" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_fuwyw")
+
+[node name="ItemTexture" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_l0725")
+
+[node name="AmountLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 33.0
+offset_bottom = 34.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
