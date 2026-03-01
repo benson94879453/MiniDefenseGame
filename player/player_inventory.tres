@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Inventory" load_steps=44 format=3 uid="uid://c4gdxiql02646"]
 
-[ext_resource type="Script" uid="uid://d3tk4m2l5yq0h" path="res://GDScript/Inventory.gd" id="1_ja0dw"]
-[ext_resource type="Script" uid="uid://bmw10rt7c88hg" path="res://GDScript/Slot.gd" id="2_ep336"]
+[ext_resource type="Script" uid="uid://d3tk4m2l5yq0h" path="res://scripts/resources/Inventory.gd" id="1_ja0dw"]
+[ext_resource type="Script" uid="uid://bmw10rt7c88hg" path="res://scripts/resources/Slot.gd" id="2_ep336"]
 [ext_resource type="Resource" uid="uid://ds8s7kulpm1w" path="res://item/apple.tres" id="3_5dyb5"]
 [ext_resource type="Resource" uid="uid://b7g10ak8rp4sd" path="res://item/axe.tres" id="4_s4ccx"]
 [ext_resource type="Resource" uid="uid://doqig8xvspypg" path="res://item/banana.tres" id="5_vvr1h"]

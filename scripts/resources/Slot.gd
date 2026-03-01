@@ -6,3 +6,7 @@ class_name Slot
 @export var item: ItemData = null
 # 這一格的道具數量
 @export var count: int = 0
+
+func clear() -> void:
+	item = null
+	count = 0

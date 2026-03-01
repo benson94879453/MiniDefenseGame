@@ -9,6 +9,8 @@ signal mouse_button_right_press
 # 這個按鈕肚子裡裝著的「實體圖示」節點 (取代原本冗長的 slot_button_slot_item)
 var slot_inventory: Inventory
 
+var slot_index: int
+
 var contained_item_icon: SlotItem
 
 func _ready() -> void:
@@ -24,6 +26,11 @@ func insert(new_item_icon: SlotItem):
 	contained_item_icon = new_item_icon
 	slot_background.color = Color(0.7, 0.7, 0.7, 0.8)
 	center_container.add_child(contained_item_icon)
+	
+	if !contained_item_icon:
+		return
+	
+	slot_inventory.insert_slot(slot_index,contained_item_icon.slot_data)
 
 # [新增優化] 負責清空這格 UI，把肚子裡的圖示刪除並恢復顏色
 func clear_box():
