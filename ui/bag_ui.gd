@@ -15,6 +15,7 @@ var inventory_data: Inventory = preload("res://player/player_inventory.tres")
 
 var mouse_item: SlotItem = null
 func _ready() -> void:
+	connect_signal()
 	close_bag()
 
 func connect_signal():
@@ -36,7 +37,6 @@ func bag_update():
 	
 		# 狀況 A：如果這格沒有資料，或資料裡面是空的
 		if not current_slot_data or not current_slot_data.item:
-			current_ui_box.clear_box() # 呼叫我們剛剛寫好的清空函式
 			continue # 直接跳到下一格
 		
 		# 狀況 B：這格有道具資料
@@ -59,6 +59,11 @@ func set_player_inventory(player_inventory: Inventory):
 
 func open_bag(player_inventory: Inventory):
 	set_player_inventory(player_inventory)
+	
+	inventory_data.inventory_update.connect(bag_update)
+	
+	for slot_button in all_ui_slots:
+		slot_button.slot_inventory = inventory_data
 	show()
 
 func close_bag():
@@ -75,3 +80,14 @@ func take_item_from_slot(slot_button):
 	mouse_item = slot_button.take_item()
 	
 	add_child(mouse_item)
+	item_follow_mouse()
+	
+func item_follow_mouse():
+	
+	if !mouse_item:
+		return
+	
+	mouse_item.global_position = get_global_mouse_position()
+
+func _input(event: InputEvent) -> void: 
+	item_follow_mouse()

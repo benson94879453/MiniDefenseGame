@@ -7,6 +7,8 @@ signal mouse_button_right_press
 @onready var center_container: CenterContainer = %CenterContainer
 
 # 這個按鈕肚子裡裝著的「實體圖示」節點 (取代原本冗長的 slot_button_slot_item)
+var slot_inventory: Inventory
+
 var contained_item_icon: SlotItem
 
 func _ready() -> void:
@@ -42,7 +44,12 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func take_item():
 	var take_item_ = contained_item_icon
+	
+	
+	slot_inventory.remove_slot(contained_item_icon.slot_data)
+	
 	center_container.remove_child(contained_item_icon)
+	
 	contained_item_icon = null
 	reset_color()
 	return take_item_
