@@ -27,7 +27,12 @@ func connect_slot_signals() -> void:
 		var callable = mouse_left_slot_button.bind(slot_button)
 		if not slot_button.mouse_button_left_press.is_connected(callable):
 			slot_button.mouse_button_left_press.connect(callable)
-
+		
+		var right_callable = mouse_right_slot_button.bind(slot_button)
+		if not slot_button.mouse_button_right_press.is_connected(right_callable):
+			slot_button.mouse_button_right_press.connect(right_callable)
+			
+			
 func bag_update() -> void:
 	if inventory_data.slots.size() != all_ui_slots.size():
 		printerr("錯誤：背包資料長度與 UI 格子數量不符！")
@@ -160,6 +165,23 @@ func swap_item_with_slot(slot_button) -> void:
 # ==========================================
 # 右鍵系統邏輯 (Right-Click Logic)
 # ==========================================
+func mouse_right_slot_button(slot_button) -> void:
+	# 情況 1：點擊有東西的格子 且 手上沒東西 -> 【平分拿起】
+	if not slot_button.is_empty() and not mouse_item:
+		split_half_from_slot(slot_button)
+		
+	# 情況 2：手上有東西 且 點擊空格 -> 【放 1 個到空格】
+	elif slot_button.is_empty() and mouse_item:
+		drop_one_to_slot(slot_button)
+		
+	# 情況 3：手上有東西 且 點擊有東西的格子
+	elif not slot_button.is_empty() and mouse_item:
+		var slot_data: Slot = slot_button.contained_item_icon.slot_data
+		var hand_data: Slot = mouse_item.slot_data
+		
+		# 只有在「相同道具」且「未滿堆疊上限」時，才允許【放 1 個進去】
+		if slot_data.is_same_item(hand_data) and slot_data.count < slot_data.item.max_stack:
+			drop_one_to_slot(slot_button)
 
 # 邏輯 1：平分拿起 (Split Pick-up)
 func split_half_from_slot(slot_button) -> void:
