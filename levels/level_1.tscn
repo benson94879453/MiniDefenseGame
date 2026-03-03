@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c03p1vd8fpc6e" path="res://player/player.tscn" id="1_vn7o3"]
 
-[node name="level_1" type="Node2D"]
+[node name="Level1" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("1_vn7o3")]
 
