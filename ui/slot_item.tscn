@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://chioy3n6ookj6"]
 
 [ext_resource type="Script" uid="uid://bf1ycjng2sk4m" path="res://ui/slot_item.gd" id="1_fuwyw"]
-[ext_resource type="Texture2D" uid="uid://dddmr5yi13p45" path="res://assets/apple.png" id="1_l0725"]
+[ext_resource type="Texture2D" uid="uid://dddmr5yi13p45" path="res://assets/items/apple.png" id="1_l0725"]
 
 [node name="slot_item" type="Control"]
 layout_mode = 3

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg4pn4mbt3h51"]
+
+[ext_resource type="Script" uid="uid://dihk6xle8rh2f" path="res://entities/towers/base_tower.gd" id="1_41kfv"]
+
+[node name="BaseTower" type="Node2D"]
+script = ExtResource("1_41kfv")

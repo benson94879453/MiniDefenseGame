@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhjnajyw8cety"
-path="res://.godot/imported/grape.png-490ed43dd5a8b31034e136c981fbccc1.ctex"
+path="res://.godot/imported/grape.png-155509e337a0a45a7333d06f5662b46d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/grape.png"
-dest_files=["res://.godot/imported/grape.png-490ed43dd5a8b31034e136c981fbccc1.ctex"]
+source_file="res://assets/items/grape.png"
+dest_files=["res://.godot/imported/grape.png-155509e337a0a45a7333d06f5662b46d.ctex"]
 
 [params]
 

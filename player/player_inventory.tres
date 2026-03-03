@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://d3tk4m2l5yq0h" path="res://scripts/resources/Inventory.gd" id="1_5dyb5"]
 [ext_resource type="Script" uid="uid://bmw10rt7c88hg" path="res://scripts/resources/Slot.gd" id="2_s4ccx"]
-[ext_resource type="Resource" uid="uid://ds8s7kulpm1w" path="res://item/apple.tres" id="3_5dyb5"]
-[ext_resource type="Resource" uid="uid://b7g10ak8rp4sd" path="res://item/axe.tres" id="4_s4ccx"]
-[ext_resource type="Resource" uid="uid://doqig8xvspypg" path="res://item/banana.tres" id="5_vvr1h"]
-[ext_resource type="Resource" uid="uid://dn4c4jtvfu8sx" path="res://item/grape.tres" id="6_60utp"]
-[ext_resource type="Resource" uid="uid://b3wiftb8swqan" path="res://item/wood.tres" id="7_towno"]
+[ext_resource type="Resource" uid="uid://ds8s7kulpm1w" path="res://data/items/apple.tres" id="3_5dyb5"]
+[ext_resource type="Resource" uid="uid://b7g10ak8rp4sd" path="res://data/items/axe.tres" id="4_s4ccx"]
+[ext_resource type="Resource" uid="uid://doqig8xvspypg" path="res://data/items/banana.tres" id="5_vvr1h"]
+[ext_resource type="Resource" uid="uid://dn4c4jtvfu8sx" path="res://data/items/grape.tres" id="6_60utp"]
+[ext_resource type="Resource" uid="uid://b3wiftb8swqan" path="res://data/items/wood.tres" id="7_towno"]
 
 [sub_resource type="Resource" id="Resource_ja0dw"]
 script = ExtResource("2_s4ccx")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsq1frcjtgc8e"
-path="res://.godot/imported/axe.png-b3dc51e92f6a2c7984f6fe10f6ccaa2d.ctex"
+uid="uid://wc5g37qtlds5"
+path="res://.godot/imported/wood.png-cea84b5c5a2f45f908955b4cce524a95.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/axe.png"
-dest_files=["res://.godot/imported/axe.png-b3dc51e92f6a2c7984f6fe10f6ccaa2d.ctex"]
+source_file="res://assets/items/wood.png"
+dest_files=["res://.godot/imported/wood.png-cea84b5c5a2f45f908955b4cce524a95.ctex"]
 
 [params]
 
