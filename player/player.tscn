@@ -21,6 +21,7 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_rkbax")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="bag_ui" parent="CanvasLayer" instance=ExtResource("3_g1dw6")]
 unique_name_in_owner = true

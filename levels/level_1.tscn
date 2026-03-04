@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccpf3umbtattp"]
+[gd_scene load_steps=5 format=3 uid="uid://ccpf3umbtattp"]
 
 [ext_resource type="PackedScene" uid="uid://dv63ihjky8d68" path="res://entities/enemies/base_enemy.tscn" id="1_bt44k"]
 [ext_resource type="PackedScene" uid="uid://c03p1vd8fpc6e" path="res://player/player.tscn" id="1_vn7o3"]
 [ext_resource type="PackedScene" uid="uid://cg4pn4mbt3h51" path="res://entities/towers/base_tower.tscn" id="2_jirdo"]
+[ext_resource type="Script" uid="uid://chvotjvnq0ke7" path="res://scripts/managers/wave_manager.gd" id="4_kx6l7"]
 
 [node name="Level1" type="Node2D"]
 
@@ -11,7 +12,20 @@
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 
 [node name="BaseEnemy" parent="NavigationRegion2D" instance=ExtResource("1_bt44k")]
+position = Vector2(291, 356)
 
 [node name="BaseTower" parent="." instance=ExtResource("2_jirdo")]
+position = Vector2(426, 243)
 
 [node name="player" parent="." instance=ExtResource("1_vn7o3")]
+position = Vector2(565, 394)
+
+[node name="BasePosition" type="Node2D" parent="."]
+
+[node name="WaveManager" type="Node2D" parent="." node_paths=PackedStringArray("target_node", "enemy_container")]
+script = ExtResource("4_kx6l7")
+enemy_scene = ExtResource("1_bt44k")
+target_node = NodePath("../BasePosition")
+enemy_container = NodePath("../NavigationRegion2D/BaseEnemy")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
