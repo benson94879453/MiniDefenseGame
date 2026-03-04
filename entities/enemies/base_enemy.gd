@@ -10,7 +10,7 @@ var current_health: float
 
 # ======== 新增：攻擊狀態與目標 ========
 var is_attacking: bool = false
-var target_tower: Node2D = null
+var target_building: Node2D = null
 var attack_cooldown: float = 0.0 # 用來計算攻擊間隔
 # ====================================
 
@@ -43,16 +43,16 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	# ======== 狀態 1：正在攻擊擋路的塔 ========
-	if is_attacking and is_instance_valid(target_tower):
+	if is_attacking and is_instance_valid(target_building):
 		attack_cooldown -= delta # 減少冷卻時間
 		
 		if attack_cooldown <= 0.0:
 			# 執行攻擊
-			if target_tower.has_method("take_damage"):
+			if target_building.has_method("take_damage"):
 				# 注意：這裡假設 EnemyData 裡面有 attack_power 和 attack_speed
 				# 如果還沒加，你可以先寫死數值（例如傳入 10.0），或是去 EnemyData 補上這兩個變數
 				var damage = data.attack_power if "attack_power" in data else 10.0
-				target_tower.take_damage(damage)
+				target_building.take_damage(damage)
 				
 			# 重置冷卻時間（假設 attack_speed 代表攻擊間隔秒數，例如 1.0 秒打一下）
 			attack_cooldown = data.attack_speed if "attack_speed" in data else 1.0
@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		return # 正在攻擊時，直接 return，不要往下走移動邏輯
 		
 	# 如果塔被打爆了（節點消失），恢復正常移動狀態
-	if is_attacking and not is_instance_valid(target_tower):
+	if is_attacking and not is_instance_valid(target_building):
 		is_attacking = false
 	# ========================================
 
@@ -95,9 +95,9 @@ func check_tower_collision() -> void:
 		
 		# 判斷撞到的是不是防禦塔
 		# (利用 has_method 檢查目標有沒有 take_damage 函數來判斷它是不是可被攻擊的塔/基地)
-		if collider is BaseTower:
+		if collider != null and collider.is_in_group("Attackable"):
 			is_attacking = true
-			target_tower = collider
+			target_building = collider
 			attack_cooldown = 0.0 # 撞到的瞬間立刻發動第一擊 (設定冷卻為0)
 			break # 撞到一個塔就停下來準備攻擊
 

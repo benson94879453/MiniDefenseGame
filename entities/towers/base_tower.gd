@@ -11,6 +11,10 @@ var current_target: Node2D = null
 var current_health: float 
 # ================================
 
+func _ready() -> void:
+	# 【關鍵】讓防禦塔也貼上 "Attackable" 的標籤
+	add_to_group("Attackable")
+	
 func setup(new_data: TowerData) -> void:
 	data = new_data
 	
