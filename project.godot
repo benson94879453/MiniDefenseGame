@@ -15,6 +15,10 @@ run/main_scene="uid://c03p1vd8fpc6e"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+MapManager="*res://scripts/managers/map_manager.gd"
+
 [input]
 
 inventory_key={

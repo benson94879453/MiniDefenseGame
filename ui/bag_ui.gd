@@ -6,8 +6,10 @@ extends Control
 @onready var all_ui_slots: Array = hot_bar_container.get_children() + bag_slot_container.get_children()
 var inventory_data: Inventory = preload("res://player/player_inventory.tres")
 @onready var item_icon_scene: PackedScene = preload("res://ui/slot_item.tscn")
+@onready var build_preview_scene: PackedScene = preload("res://ui/build_preview.tscn")
 
 var mouse_item: SlotItem = null
+var build_preview: BuildPreview = null
 
 func _ready() -> void:
 	connect_slot_signals()
@@ -16,10 +18,60 @@ func _ready() -> void:
 	for i in range(all_ui_slots.size()):
 		var slot = all_ui_slots[i]
 		slot.slot_index = i
+		
+	# Instantiate build preview
+	build_preview = build_preview_scene.instantiate()
+	get_tree().root.call_deferred("add_child", build_preview)
 
 func _process(_delta: float) -> void:
 	if mouse_item:
 		mouse_item.global_position = get_global_mouse_position()
+		
+		# Show build preview if holding a tower
+		if mouse_item.slot_data and mouse_item.slot_data.item is TowerData:
+			if not build_preview.is_active:
+				build_preview.activate()
+		else:
+			if build_preview.is_active:
+				build_preview.deactivate()
+	else:
+		if build_preview and build_preview.is_active:
+			build_preview.deactivate()
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Check for placing a tower on the grid
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if mouse_item and mouse_item.slot_data and mouse_item.slot_data.item is TowerData:
+			# Get true world mouse position
+			var world_pos = get_viewport().get_canvas_transform().affine_inverse() * event.position
+			var grid_pos = MapManager.world_to_grid(world_pos)
+			
+			if MapManager.is_buildable(grid_pos):
+				# Create tower
+				var tower_data = mouse_item.slot_data.item as TowerData
+				if tower_data.tower_scene:
+					var tower = tower_data.tower_scene.instantiate()
+					get_tree().current_scene.add_child(tower)
+					MapManager.place_tower(grid_pos, tower)
+					
+					# Consume item
+					mouse_item.slot_data.count -= 1
+					if mouse_item.slot_data.count <= 0:
+						mouse_item.queue_free()
+						mouse_item = null
+						build_preview.deactivate()
+					else:
+						mouse_item.slot_item_update()
+					
+					# Re-update the underlying inventory via signals if necessary,
+					# but wait, the mouse_item is detached from inventory while held!
+					# If count becomes 0, there's nothing to put back.
+					# But wait, if they right-clicked to take it, it is a copy. If left-clicked, it's the full stack.
+					# This handles the in-hand item count perfectly.
+
+func _exit_tree() -> void:
+	if is_instance_valid(build_preview):
+		build_preview.queue_free()
 
 func connect_slot_signals() -> void:
 	for slot_button in all_ui_slots:
