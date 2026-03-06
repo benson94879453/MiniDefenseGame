@@ -27,8 +27,8 @@ func _process(_delta: float) -> void:
 	if mouse_item:
 		mouse_item.global_position = get_global_mouse_position()
 		
-		# Show build preview if holding a tower
-		if mouse_item.slot_data and mouse_item.slot_data.item is TowerData:
+		# Show build preview if holding a tower or spawn egg
+		if mouse_item.slot_data and (mouse_item.slot_data.item is TowerData or mouse_item.slot_data.item is SpawnItemData):
 			if not build_preview.is_active:
 				build_preview.activate()
 		else:
@@ -55,19 +55,18 @@ func _unhandled_input(event: InputEvent) -> void:
 					MapManager.place_tower(grid_pos, tower)
 					
 					# Consume item
-					mouse_item.slot_data.count -= 1
-					if mouse_item.slot_data.count <= 0:
-						mouse_item.queue_free()
-						mouse_item = null
-						build_preview.deactivate()
-					else:
-						mouse_item.slot_item_update()
-					
-					# Re-update the underlying inventory via signals if necessary,
-					# but wait, the mouse_item is detached from inventory while held!
-					# If count becomes 0, there's nothing to put back.
-					# But wait, if they right-clicked to take it, it is a copy. If left-clicked, it's the full stack.
-					# This handles the in-hand item count perfectly.
+					consume_mouse_item()
+		
+		elif mouse_item and mouse_item.slot_data and mouse_item.slot_data.item is SpawnItemData:
+			# 生怪蛋放置邏輯
+			var world_pos = get_viewport().get_canvas_transform().affine_inverse() * event.position
+			var grid_pos = MapManager.world_to_grid(world_pos)
+			
+			if MapManager.is_buildable(grid_pos):
+				var spawn_pos = MapManager.grid_to_world(grid_pos)
+				var success = use_item(mouse_item.slot_data.item, spawn_pos)
+				if success:
+					consume_mouse_item()
 
 func _exit_tree() -> void:
 	if is_instance_valid(build_preview):
@@ -305,3 +304,54 @@ func drop_one_to_slot(slot_button) -> void:
 		# 手上扣到沒了，銷毀滑鼠上的節點，回歸空手狀態
 		mouse_item.queue_free()
 		mouse_item = null
+
+# ==========================================
+# 消耗手上道具 (Consume Held Item)
+# ==========================================
+func consume_mouse_item() -> void:
+	mouse_item.slot_data.count -= 1
+	if mouse_item.slot_data.count <= 0:
+		mouse_item.queue_free()
+		mouse_item = null
+		build_preview.deactivate()
+	else:
+		mouse_item.slot_item_update()
+
+# ==========================================
+# 生怪蛋使用邏輯 (Spawn Egg Use Logic)
+# ==========================================
+
+## 嘗試使用一個 SpawnItemData 道具，在指定位置生成實體。
+## 回傳 true 表示成功生成，false 表示失敗（場景或資料缺失）。
+func use_item(item: ItemData, spawn_pos: Vector2) -> bool:
+	# 1. 型別檢查：確認這是一個 SpawnItemData
+	if not item is SpawnItemData:
+		push_warning("use_item: 傳入的道具不是 SpawnItemData，已忽略。")
+		return false
+	
+	var spawn_data := item as SpawnItemData
+	
+	# 2. 防呆：確保場景已設定
+	if spawn_data.entity_scene == null:
+		push_warning("use_item: SpawnItemData 的 entity_scene 為 null，無法生成實體。")
+		return false
+	
+	# 3. 實例化場景
+	var entity: Node = spawn_data.entity_scene.instantiate()
+	
+	# 5. 設定位置並加入場景樹
+	#    必須先 add_child，@onready 變數才會在 _ready() 中被賦值，
+	#    setup() 才能安全地存取 collision_shape 等子節點。
+	if entity is Node2D:
+		(entity as Node2D).global_position = spawn_pos
+	
+	get_tree().current_scene.add_child(entity)
+	
+	# 6. 在節點進入場景樹後才注入資料 (與 WaveManager 的做法一致)
+	if spawn_data.payload_data != null and entity.has_method("setup"):
+		entity.call("setup", spawn_data.payload_data)
+	elif spawn_data.payload_data != null:
+		push_warning("use_item: 實體缺少 setup() 函數，payload_data 未注入。")
+	
+	return true
+

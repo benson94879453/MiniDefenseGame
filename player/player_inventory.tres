@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=44 format=3 uid="uid://c4gdxiql02646"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=45 format=3 uid="uid://c4gdxiql02646"]
 
 [ext_resource type="Script" uid="uid://d3tk4m2l5yq0h" path="res://scripts/resources/Inventory.gd" id="1_5dyb5"]
 [ext_resource type="Script" uid="uid://bmw10rt7c88hg" path="res://scripts/resources/Slot.gd" id="2_s4ccx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://doqig8xvspypg" path="res://data/items/banana.tres" id="5_vvr1h"]
 [ext_resource type="Resource" uid="uid://dn4c4jtvfu8sx" path="res://data/items/grape.tres" id="6_60utp"]
 [ext_resource type="Resource" uid="uid://b3wiftb8swqan" path="res://data/items/wood.tres" id="7_towno"]
+[ext_resource type="Resource" path="res://data/items/spawn_enemy_egg.tres" id="8_s4ccx"]
 
 [sub_resource type="Resource" id="Resource_ja0dw"]
 script = ExtResource("2_s4ccx")
@@ -68,6 +69,7 @@ metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_la3qd"]
 script = ExtResource("2_s4ccx")
+item = ExtResource("8_s4ccx")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_a631d"]
