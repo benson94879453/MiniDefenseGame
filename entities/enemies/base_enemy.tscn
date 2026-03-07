@@ -1,27 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv63ihjky8d68"]
+[gd_scene format=3 uid="uid://dv63ihjky8d68"]
 
 [ext_resource type="Script" uid="uid://c0nx3krblfarg" path="res://entities/enemies/base_enemy.gd" id="1_20vb3"]
 [ext_resource type="Resource" uid="uid://0u0tbww4rlwf" path="res://data/enemies/first_enemy.tres" id="2_ocmy6"]
 [ext_resource type="Texture2D" uid="uid://ccd43ch345ks5" path="res://icon.svg" id="3_ocmy6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ocmy6"]
-radius = 32.0
+radius = 16.0
 
-[node name="BaseEnemy" type="CharacterBody2D"]
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=603120399]
 script = ExtResource("1_20vb3")
 data = ExtResource("2_ocmy6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1268242907]
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_ocmy6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=108937459]
 unique_name_in_owner = true
 texture = ExtResource("3_ocmy6")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=690688033]
 unique_name_in_owner = true
 avoidance_enabled = true
 avoidance_mask = 7
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=2068289957]

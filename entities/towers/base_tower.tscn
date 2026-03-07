@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg4pn4mbt3h51"]
+[gd_scene format=3 uid="uid://cg4pn4mbt3h51"]
 
 [ext_resource type="Script" uid="uid://dihk6xle8rh2f" path="res://entities/towers/base_tower.gd" id="1_41kfv"]
 [ext_resource type="Texture2D" uid="uid://bxfb5nfqjbyth" path="res://assets/towers/first_tower.png" id="2_a13c5"]
@@ -6,20 +6,20 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_a13c5"]
 radius = 100.0
 
-[node name="BaseTower" type="CharacterBody2D"]
+[node name="BaseTower" type="CharacterBody2D" unique_id=1709733456]
 script = ExtResource("1_41kfv")
 
-[node name="RangeArea" type="Area2D" parent="."]
+[node name="RangeArea" type="Area2D" parent="." unique_id=2099393635]
 unique_name_in_owner = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=977676103]
 shape = SubResource("CircleShape2D_a13c5")
 
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="AttackTimer" type="Timer" parent="." unique_id=844916311]
 unique_name_in_owner = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=42273387]
 texture = ExtResource("2_a13c5")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=600143471]
 polygon = PackedVector2Array(0, -16, 16, 16, -16, 16)

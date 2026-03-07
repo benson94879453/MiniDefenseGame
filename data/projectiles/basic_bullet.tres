@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://dquw06cqs1ris"]
+
+[ext_resource type="Script" uid="uid://c5b30dycc0huh" path="res://scripts/resources/ProjectileData.gd" id="1_x1r3x"]
+
+[resource]
+script = ExtResource("1_x1r3x")
+display_name = "測試用子彈"
+metadata/_custom_type_script = "uid://c5b30dycc0huh"

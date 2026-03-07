@@ -1,23 +1,25 @@
 extends CharacterBody2D
 class_name BasePosition
 
-@export var max_health: float = 100.0 # 可以在編輯器中設定主基地血量
-var current_health: float
+signal base_destroyed
+
+@export var max_health: float = 100.0
+var _current_health: float
 
 func _ready() -> void:
-	# 【關鍵】在遊戲開始時，自動為自己貼上 "Attackable" 的標籤
-	add_to_group("Attackable") 
-	current_health = max_health
+	add_to_group("Attackable")
+	add_to_group("Base")
+	_current_health = max_health
+	
+	if not base_destroyed.is_connected(GameManager.game_over):
+		base_destroyed.connect(GameManager.game_over)
 
 func take_damage(amount: float) -> void:
-	current_health -= amount
-	# TODO: 未來可以加上主基地受擊發紅的特效或音效
-	print("主基地受到傷害！剩餘血量：", current_health)
-	
-	if current_health <= 0:
+	_current_health -= amount
+	if _current_health <= 0:
 		die()
 
 func die() -> void:
-	# TODO: 未來這裡要呼叫 GameManager 觸發 Game Over 結算畫面
-	print("主基地被摧毀，Game Over！")
+	base_destroyed.emit()
 	queue_free()
+

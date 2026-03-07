@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://dv63ihjky8d68" path="res://entities/enemies/base_enemy.tscn" id="1_bt44k"]
 [ext_resource type="TileSet" uid="uid://caa2d7kat71xd" path="res://levels/test_tileset.tres" id="1_n46q3"]
 [ext_resource type="PackedScene" uid="uid://c03p1vd8fpc6e" path="res://player/player.tscn" id="1_vn7o3"]
-[ext_resource type="PackedScene" uid="uid://cg4pn4mbt3h51" path="res://entities/towers/base_tower.tscn" id="2_jirdo"]
 [ext_resource type="PackedScene" uid="uid://cp3npgesih21r" path="res://entities/towers/base_position.tscn" id="4_gwceb"]
 [ext_resource type="Script" uid="uid://chvotjvnq0ke7" path="res://scripts/managers/wave_manager.gd" id="4_kx6l7"]
 [ext_resource type="Resource" uid="uid://0u0tbww4rlwf" path="res://data/enemies/first_enemy.tres" id="5_btoec"]
@@ -26,9 +25,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAA
 tile_set = ExtResource("1_n46q3")
 
 [node name="EnemyContainer" type="Node2D" parent="NavigationRegion2D" unique_id=1226494014]
-
-[node name="BaseTower" parent="." unique_id=1405736517 instance=ExtResource("2_jirdo")]
-position = Vector2(400, 240)
 
 [node name="player" parent="." unique_id=1363236298 instance=ExtResource("1_vn7o3")]
 position = Vector2(720, 464)

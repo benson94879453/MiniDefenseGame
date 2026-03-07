@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://dn4c4jtvfu8sx" path="res://data/items/grape.tres" id="6_60utp"]
 [ext_resource type="Resource" uid="uid://b3wiftb8swqan" path="res://data/items/wood.tres" id="7_towno"]
 [ext_resource type="Resource" uid="uid://21diidnv6tg5" path="res://data/items/spawn_enemy_egg.tres" id="8_s4ccx"]
+[ext_resource type="Resource" uid="uid://bem15hcyh31hk" path="res://data/towers/first_tower.tres" id="9_vvr1h"]
 
 [sub_resource type="Resource" id="Resource_ja0dw"]
 script = ExtResource("2_s4ccx")
@@ -61,10 +62,12 @@ metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_towno"]
 script = ExtResource("2_s4ccx")
+item = ExtResource("9_vvr1h")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_ghfo5"]
 script = ExtResource("2_s4ccx")
+item = ExtResource("9_vvr1h")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_la3qd"]
@@ -74,10 +77,13 @@ metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_a631d"]
 script = ExtResource("2_s4ccx")
+item = ExtResource("9_vvr1h")
+count = 1
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_3ib8q"]
 script = ExtResource("2_s4ccx")
+item = ExtResource("9_vvr1h")
 metadata/_custom_type_script = "uid://bmw10rt7c88hg"
 
 [sub_resource type="Resource" id="Resource_nots1"]

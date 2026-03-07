@@ -6,6 +6,10 @@ extends CharacterBody2D
 
 var is_bag_open: bool = false
 
+func _ready() -> void:
+	# 加入 "Player" 群組，讓 GameManager.give_reward() 能找到玩家
+	add_to_group("Player")
+
 func _input(event):
 	if event.is_action_pressed("inventory_key"):
 		toggle_bag()
