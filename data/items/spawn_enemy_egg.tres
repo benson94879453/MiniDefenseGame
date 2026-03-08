@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="SpawnItemData" load_steps=5 format=3 uid="uid://21diidnv6tg5"]
+[gd_resource type="Resource" script_class="SpawnItemData" format=3 uid="uid://21diidnv6tg5"]
 
 [ext_resource type="Script" uid="uid://cbui6seo5rocy" path="res://scripts/resources/SpawnItemData.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://dv63ihjky8d68" path="res://entities/enemies/base_enemy.tscn" id="2_scene"]
+[ext_resource type="PackedScene" uid="uid://c5spks1xmivr" path="res://entities/enemies/base_enemy.tscn" id="2_scene"]
 [ext_resource type="Resource" uid="uid://0u0tbww4rlwf" path="res://data/enemies/first_enemy.tres" id="3_data"]
 [ext_resource type="Texture2D" uid="uid://q2r3alybev2m" path="res://assets/items/spawn_egg.png" id="4_5ssx6"]
 
@@ -12,5 +12,5 @@ payload_data = ExtResource("3_data")
 id = 101
 name = "spawn_egg"
 texture = ExtResource("4_5ssx6")
-max_stack = 16
+max_stack = 99
 description = "放置後可召喚怪物的沙盒測試道具"

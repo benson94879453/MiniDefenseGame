@@ -2,12 +2,17 @@ extends Control
 
 @export var wave_manager: WaveManager
 
+signal return_to_editor_requested
+
 @onready var _start_wave_btn: Button = %StartWaveButton
 @onready var _gold_label: Label = %GoldLabel
 @onready var _wave_label: Label = %WaveLabel
+@onready var _return_btn: Button = $Panel/VBoxContainer/BtnReturn
 
 func _ready() -> void:
 	_start_wave_btn.pressed.connect(_on_start_wave_pressed)
+	if _return_btn:
+		_return_btn.pressed.connect(func(): return_to_editor_requested.emit())
 	
 	if wave_manager:
 		wave_manager.wave_started.connect(_on_wave_started)

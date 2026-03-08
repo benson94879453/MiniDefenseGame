@@ -54,8 +54,15 @@ func _unhandled_input(event: InputEvent) -> void:
 				var tower_data = _mouse_item.slot_data.item as TowerData
 				if tower_data.tower_scene:
 					var tower = tower_data.tower_scene.instantiate()
-					get_tree().current_scene.add_child(tower)
-					MapManager.place_tower(grid_pos, tower)
+					
+					var container = get_tree().current_scene.get_node_or_null("ModePlay/EntitiesContainer")
+					if container:
+						container.add_child(tower)
+					else:
+						get_tree().current_scene.add_child(tower)
+						
+					tower.global_position = MapManager.grid_to_world(grid_pos)
+					MapManager.register_tower(grid_pos)
 					
 					if tower.has_method("setup"):
 						tower.setup(tower_data)
@@ -205,7 +212,7 @@ func _mouse_right_slot_button(slot_button) -> void:
 func _split_half_from_slot(slot_button) -> void:
 	var slot_data: Slot = slot_button.contained_item_icon.slot_data
 	var total_count: int = slot_data.count
-	var hand_count: int = int((total_count + 1) / 2) 
+	var hand_count: int = int((total_count + 1) / 2.0) 
 	var left_count: int = total_count - hand_count   
 	
 	if left_count == 0:
@@ -274,7 +281,7 @@ func _use_item(item: ItemData, spawn_pos: Vector2) -> bool:
 	if entity is Node2D:
 		(entity as Node2D).global_position = spawn_pos
 	
-	var enemy_container = get_tree().current_scene.get_node_or_null("NavigationRegion2D/EnemyContainer")
+	var enemy_container = get_tree().current_scene.get_node_or_null("ModePlay/EntitiesContainer")
 	if enemy_container:
 		enemy_container.add_child(entity)
 	else:
@@ -284,7 +291,7 @@ func _use_item(item: ItemData, spawn_pos: Vector2) -> bool:
 		entity.call("setup", spawn_data.payload_data)
 	
 	if entity.has_method("set_target"):
-		var base = get_tree().current_scene.get_node_or_null("BasePosition")
+		var base = get_tree().get_first_node_in_group("Base")
 		if base:
 			entity.set_target(base.global_position)
 	

@@ -9,6 +9,15 @@ var _gold: int = 100
 func get_gold() -> int:
 	return _gold
 
+## 從 LevelData 注入初始資源
+func import_data(data: LevelData) -> void:
+	if data:
+		_gold = data.initial_gold
+	else:
+		_gold = 100 # default
+	_is_game_over = false
+	gold_changed.emit(_gold)
+
 func add_gold(amount: int) -> void:
 	_gold += amount
 	gold_changed.emit(_gold)

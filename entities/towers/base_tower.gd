@@ -34,6 +34,8 @@ func take_damage(amount: float) -> void:
 		die()
 
 func die() -> void:
+	var grid_pos = MapManager.world_to_grid(global_position)
+	MapManager.clear_cell(grid_pos)
 	queue_free()
 
 func _on_attack_timer_timeout() -> void:

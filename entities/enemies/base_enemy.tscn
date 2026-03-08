@@ -22,7 +22,6 @@ shape = SubResource("CircleShape2D_ocmy6")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_ocmy6")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
 

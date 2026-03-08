@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="MiniDefenseGame"
-run/main_scene="uid://c03p1vd8fpc6e"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 MapManager="*res://scripts/managers/map_manager.gd"
 GameManager="*res://scripts/managers/game_manager.gd"
+LevelManager="*res://scripts/managers/LevelManager.gd"
 
 [editor_plugins]
 

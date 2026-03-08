@@ -12,6 +12,6 @@ projectile_scene = ExtResource("1_p8qhs")
 id = 200
 name = "first_twoer"
 texture = ExtResource("3_g4b8e")
-max_stack = 1
+max_stack = 99
 description = "測試用防禦塔"
 metadata/_custom_type_script = "uid://bwl0ii865y57m"
